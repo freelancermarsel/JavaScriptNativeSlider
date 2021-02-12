@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript</title>
+</head>
+<style>
+  body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-direction: column;
+    margin: auto;
+  }
+
+  .slider {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .slider__wrapper {
+    display: flex;
+    width: 1200px;
+    height: 200px;
+    transform: translateX(0px);
+    transition: all .2s linear;
+  }
+
+  .slider__item {
+    width: 200px;
+    height: 200px;
+  }
+
+  .slider__btns {
+    display: flex;
+    margin-top: 100px;
+  }
+
+  .btn {
+    margin: 50px 25px;
+    width: 100px;
+    height: 100px;
+  }
+
+  /* Second */
+  .slider__second {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .slider__wrapper__second {
+    display: flex;
+    width: 1200px;
+    height: 200px;
+    transform: translateX(0px);
+    transition: all .2s linear;
+  }
+
+  .slider__item__second {
+    width: 200px;
+    height: 200px;
+  }
+
+  .slider__btns__second {
+    display: flex;
+    margin-top: 100px;
+  }
+
+</style>
+<body>
+  <div class="slider">
+    <div class="slider__wrapper">
+      <div style="background-color: red;" class="slider__item"></div>
+      <div style="background-color: blue;" class="slider__item"></div>
+      <div style="background-color: orange;" class="slider__item"></div>
+      <div style="background-color: green;" class="slider__item"></div>
+      <div style="background-color: black;" class="slider__item"></div>
+      <div style="background-color: lightgreen;" class="slider__item"></div>
+    </div>
+  </div>
+  <div class="slider__btns">
+    <button class="btn btn--prev">Prev</button>
+    <button class="btn btn--next">Next</button>
+  </div>
+
+
+
+  <div class="slider__second">
+    <div class="slider__wrapper__second">
+      <div style="background-color: red;" class="slider__item__second"></div>
+      <div style="background-color: blue;" class="slider__item__second"></div>
+      <div style="background-color: orange;" class="slider__item__second"></div>
+      <div style="background-color: green;" class="slider__item__second"></div>
+      <div style="background-color: black;" class="slider__item__second"></div>
+      <div style="background-color: lightgreen;" class="slider__item__second"></div>
+    </div>
+  </div>
+  <div class="slider__btns__second">
+    <button class="btn btn--prev__second">Prev</button>
+    <button class="btn btn--next__second">Next</button>
+  </div>
+
+
+
+  <script src="slider.js"></script>
+</body>
+</html>
