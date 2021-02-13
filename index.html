@@ -16,21 +16,25 @@
   }
 
   .slider {
-    width: 300px;
-    height: 200px;
+    width: 100%;
+    height: 80vh;
     overflow: hidden;
   }
 
   .slider__wrapper {
     display: flex;
-    width: 900px;
-    height: 200px;
+    width: 700%;
+    height: 80vh;
     transition: all .2s linear;
   }
 
+  .slider__timer {
+    transition: all 1s linear;
+  }
+
   .slider__item {
-    width: 50%;
-    height: 200px;
+    width: 100%;
+    height: 80vh;
   }
 
   .slider__btns {
@@ -39,7 +43,7 @@
   }
 
   .btn {
-    margin: 50px 25px;
+    margin: -75px 25px;
     width: 100px;
     height: 100px;
   }
@@ -79,10 +83,11 @@
       <div style="background-color: green;" class="slider__item"></div>
       <div style="background-color: black;" class="slider__item"></div>
       <div style="background-color: lightgreen;" class="slider__item"></div>
+      <div style="background-color: gray;" class="slider__item"></div>
     </div>
   </div>
   <div class="slider__btns">
-    <button class="btn btn--prev">Prev</button>
+    <button  class="btn btn--prev">Prev</button>
     <button class="btn btn--next">Next</button>
   </div>
 

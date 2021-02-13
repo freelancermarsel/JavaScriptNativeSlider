@@ -1,4 +1,4 @@
-function animatedFunction({ next, prev, items, selector, wrapper, item, count = 1 }) {
+function AnimatedFunction({ next, prev, items, selector, wrapper, item, count = 1, timerClass }) {
     const nextBtn = document.querySelector(next);
     const prevBtn = document.querySelector(prev);
     const sliderItems = document.querySelectorAll(items);
@@ -6,33 +6,38 @@ function animatedFunction({ next, prev, items, selector, wrapper, item, count = 
     const slider = document.querySelector(selector);
     const sliderWrapper = document.querySelector(wrapper);
     let offset = 0;
+    sliderWrapper.style = `transform: translateX(${offset}px);`;
 
     nextBtn.addEventListener("click", () => {
         if (offset === -(getComputedStyle(slider).width.replace(/\D/g, "") * (sliderItems.length / count) - getComputedStyle(slider).width.replace(/\D/g, "")) || offset === -(getComputedStyle(sliderWrapper).width.replace(/\D/g, "") - getComputedStyle(sliderItem).width.replace(/\D/g, ""))) {
             offset = getComputedStyle(slider).width.replace(/\D/g, "");
+            sliderWrapper.classList.add('slider__timer');
+        } else {
+            sliderWrapper.classList.remove('slider__timer');
         }
         offset -= getComputedStyle(slider).width.replace(/\D/g, "");
         sliderWrapper.style = `transform: translateX(${offset}px);`;
     });
-
-    prevBtn.addEventListener("click", () => {
+    prevBtn.addEventListener("click", () => {      
         if (offset === 0 || offset === (getComputedStyle(sliderWrapper).width.replace(/\D/g, "") / sliderItems.length)) {
             offset = -getComputedStyle(slider).width.replace(/\D/g, "") * (sliderItems.length / count);
+            sliderWrapper.classList.add(timerClass);
+        } else {
+            sliderWrapper.classList.remove(timerClass);
         }
-        console.log(-getComputedStyle(slider).width.replace(/\D/g, ''));
         offset += +getComputedStyle(slider).width.replace(/\D/g, "");
-        // console.log(offset);
         sliderWrapper.style = `transform: translateX(${offset}px);`;
     });
 }
-animatedFunction({
+AnimatedFunction({
     next: '.btn--next',
     prev: '.btn--prev',
     items: '.slider__item',
     item: '.slider__item',
     selector: '.slider',
     wrapper: '.slider__wrapper',
-    count: 2
+    count: 1,
+    timerClass: 'slider__timer'
 });
 
 // animatedFunction({
