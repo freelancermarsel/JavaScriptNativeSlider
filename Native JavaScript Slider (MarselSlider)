@@ -1,8 +1,11 @@
 Options:
-next - forward button
-prev - back button
-items - all sliders
-item - separate slider, needed for the script to work
-selector - master slider selector
-wrapper - a slider wrapper that scrolls
-count - number of visible slides
+AnimatedFunction({
+  next - forward button (Кнопка вперёд)
+  prev - back button (Кнопка назад)
+  items - all sliders (Класс слайдеров)
+  item - separate slider, needed for the script to work (Класс слайда, обязателен)
+  selector - master slider selector (Главный слайдер селектор)
+  wrapper - a slider wrapper that scrolls (Обертка слайдер для скролла)
+  count - number of visible slides (Количество видимых слайдов)
+  timerClass - scrolling speed if it is the last or first slider, not using dot (Время прокрутки, если слайд последний или первый);=
+});
