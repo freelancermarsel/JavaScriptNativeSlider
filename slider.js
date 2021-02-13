@@ -48,6 +48,9 @@ function AnimatedFunction({ next, prev, items, selector, wrapper, item, count = 
             if (offset === -(getComputedStyle(slider).width.replace(/\D/g, ""))) {
                 prevBtn.disabled = true;
                 nextBtn.disabled = false;
+            } else {
+                prevBtn.disabled = false;
+                nextBtn.disabled = false;
             }
             offset += +getComputedStyle(slider).width.replace(/\D/g, "");
             sliderWrapper.style = `transform: translateX(${offset}px);`;
@@ -63,7 +66,7 @@ AnimatedFunction({
     wrapper: '.slider__wrapper',
     count: 1,
     timerClass: 'slider__timer',
-    infinite: true,
+    infinite: false,
     autoTimer: 2000
 });
 
