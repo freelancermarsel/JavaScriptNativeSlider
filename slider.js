@@ -8,25 +8,32 @@ function AnimatedFunction({ next, prev, items, selector, wrapper, item, count = 
     let offset = 0;
     sliderWrapper.style = `transform: translateX(${offset}px);`;
 
+    console.log(-(getComputedStyle(slider).width.replace(/\D/g, "") * (sliderItems.length / count) - getComputedStyle(slider).width.replace(/\D/g, "")));
+
     if (infinite) {
         setInterval(() => {
-                if (offset === -(getComputedStyle(slider).width.replace(/\D/g, "") * (sliderItems.length / count) - getComputedStyle(slider).width.replace(/\D/g, "")) || offset === -(getComputedStyle(sliderWrapper).width.replace(/\D/g, "") - getComputedStyle(sliderItem).width.replace(/\D/g, ""))) {
-                    offset = getComputedStyle(slider).width.replace(/\D/g, "");
-                    sliderWrapper.classList.add('slider__timer');
-                } else {
-                    sliderWrapper.classList.remove('slider__timer');
-                }
-                offset -= getComputedStyle(slider).width.replace(/\D/g, "");
-                sliderWrapper.style = `transform: translateX(${offset}px);`;
+            if (offset <= -(getComputedStyle(slider).width.replace(/\D/g, "") * (sliderItems.length / count) - getComputedStyle(slider).width.replace(/\D/g, "")) || offset === -(getComputedStyle(sliderWrapper).width.replace(/\D/g, "") - getComputedStyle(sliderItem).width.replace(/\D/g, ""))) {
+                offset = getComputedStyle(slider).width.replace(/\D/g, "");
+                sliderWrapper.classList.add(timerClass);
+            } else {
+                sliderWrapper.classList.remove(timerClass);
+            }
+            offset -= getComputedStyle(slider).width.replace(/\D/g, "");
+            sliderWrapper.style = `transform: translateX(${offset}px);`;
         }, autoTimer);
-    } else {
+    } else if (nextBtn && prevBtn) {
+        prevBtn.disabled = true;
         nextBtn.addEventListener("click", () => {
             if (offset === -(getComputedStyle(slider).width.replace(/\D/g, "") * (sliderItems.length / count) - getComputedStyle(slider).width.replace(/\D/g, "")) || offset === -(getComputedStyle(sliderWrapper).width.replace(/\D/g, "") - getComputedStyle(sliderItem).width.replace(/\D/g, ""))) {
                 offset = getComputedStyle(slider).width.replace(/\D/g, "");
-                sliderWrapper.classList.add('slider__timer');
+                sliderWrapper.classList.add(timerClass);
             } else {
-                sliderWrapper.classList.remove('slider__timer');
+                sliderWrapper.classList.remove(timerClass);
             }
+            if (offset === -((getComputedStyle(sliderWrapper).width.replace(/\D/g, "") - getComputedStyle(slider).width.replace(/\D/g, "")) / count - getComputedStyle(slider).width.replace(/\D/g, ""))) {
+                nextBtn.disabled = true;
+            }
+            prevBtn.disabled = false;
             offset -= getComputedStyle(slider).width.replace(/\D/g, "");
             sliderWrapper.style = `transform: translateX(${offset}px);`;
         });
@@ -36,6 +43,11 @@ function AnimatedFunction({ next, prev, items, selector, wrapper, item, count = 
                 sliderWrapper.classList.add(timerClass);
             } else {
                 sliderWrapper.classList.remove(timerClass);
+            }
+
+            if (offset === -(getComputedStyle(slider).width.replace(/\D/g, ""))) {
+                prevBtn.disabled = true;
+                nextBtn.disabled = false;
             }
             offset += +getComputedStyle(slider).width.replace(/\D/g, "");
             sliderWrapper.style = `transform: translateX(${offset}px);`;
@@ -52,7 +64,7 @@ AnimatedFunction({
     count: 1,
     timerClass: 'slider__timer',
     infinite: true,
-    autoTimer: 4000
+    autoTimer: 2000
 });
 
 // animatedFunction({
