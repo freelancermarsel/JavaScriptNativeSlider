@@ -1,14 +1,14 @@
-function animatedFunction({ next, prev, items, selector, wrapper, count = 1 }) {
+function animatedFunction({ next, prev, items, selector, wrapper, item, count = 1 }) {
     const nextBtn = document.querySelector(next);
     const prevBtn = document.querySelector(prev);
     const sliderItems = document.querySelectorAll(items);
+    const sliderItem = document.querySelector(item);
     const slider = document.querySelector(selector);
     const sliderWrapper = document.querySelector(wrapper);
     let offset = 0;
-    slider.style = `transform: translateX(${offset}px)`;
 
     nextBtn.addEventListener("click", () => {
-        if (offset === -(getComputedStyle(slider).width.replace(/\D/g, "") * (sliderItems.length / count) - getComputedStyle(slider).width.replace(/\D/g, ""))) {
+        if (offset === -(getComputedStyle(slider).width.replace(/\D/g, "") * (sliderItems.length / count) - getComputedStyle(slider).width.replace(/\D/g, "")) || offset === -(getComputedStyle(sliderWrapper).width.replace(/\D/g, "") - getComputedStyle(sliderItem).width.replace(/\D/g, ""))) {
             offset = getComputedStyle(slider).width.replace(/\D/g, "");
         }
         offset -= getComputedStyle(slider).width.replace(/\D/g, "");
@@ -16,7 +16,7 @@ function animatedFunction({ next, prev, items, selector, wrapper, count = 1 }) {
     });
 
     prevBtn.addEventListener("click", () => {
-        if (offset === 0) {
+        if (offset === 0 || offset === (getComputedStyle(sliderWrapper).width.replace(/\D/g, "") / sliderItems.length)) {
             offset = -getComputedStyle(slider).width.replace(/\D/g, "") * (sliderItems.length / count);
         }
         console.log(-getComputedStyle(slider).width.replace(/\D/g, ''));
@@ -29,6 +29,7 @@ animatedFunction({
     next: '.btn--next',
     prev: '.btn--prev',
     items: '.slider__item',
+    item: '.slider__item',
     selector: '.slider',
     wrapper: '.slider__wrapper',
     count: 2
