@@ -8,4 +8,6 @@ AnimatedFunction({
   wrapper - a slider wrapper that scrolls (Обертка слайдер для скролла)
   count - number of visible slides (Количество видимых слайдов)
   timerClass - scrolling speed if it is the last or first slider, not using dot (Время прокрутки, если слайд последний или первый);
+  infinite: true, - infinite scroll , infinity cannot be set to true together with pop-ups, buttons will not work (инфинити нельзя ставить в true вместе с кпопками, кнопки работать не будут)
+  autoTimer: 4000 - timer infinite scroll 
 });
