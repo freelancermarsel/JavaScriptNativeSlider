@@ -1,0 +1,8 @@
+Options:
+next - forward button
+prev - back button
+items - all sliders
+item - separate slider, needed for the script to work
+selector - master slider selector
+wrapper - a slider wrapper that scrolls
+count - number of visible slides
