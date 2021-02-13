@@ -1,4 +1,4 @@
-function AnimatedFunction({ next, prev, items, selector, wrapper, item, count = 1, timerClass }) {
+function AnimatedFunction({ next, prev, items, selector, wrapper, item, count = 1, timerClass, infinite, autoTimer }) {
     const nextBtn = document.querySelector(next);
     const prevBtn = document.querySelector(prev);
     const sliderItems = document.querySelectorAll(items);
@@ -8,26 +8,39 @@ function AnimatedFunction({ next, prev, items, selector, wrapper, item, count = 
     let offset = 0;
     sliderWrapper.style = `transform: translateX(${offset}px);`;
 
-    nextBtn.addEventListener("click", () => {
-        if (offset === -(getComputedStyle(slider).width.replace(/\D/g, "") * (sliderItems.length / count) - getComputedStyle(slider).width.replace(/\D/g, "")) || offset === -(getComputedStyle(sliderWrapper).width.replace(/\D/g, "") - getComputedStyle(sliderItem).width.replace(/\D/g, ""))) {
-            offset = getComputedStyle(slider).width.replace(/\D/g, "");
-            sliderWrapper.classList.add('slider__timer');
-        } else {
-            sliderWrapper.classList.remove('slider__timer');
-        }
-        offset -= getComputedStyle(slider).width.replace(/\D/g, "");
-        sliderWrapper.style = `transform: translateX(${offset}px);`;
-    });
-    prevBtn.addEventListener("click", () => {      
-        if (offset === 0 || offset === (getComputedStyle(sliderWrapper).width.replace(/\D/g, "") / sliderItems.length)) {
-            offset = -getComputedStyle(slider).width.replace(/\D/g, "") * (sliderItems.length / count);
-            sliderWrapper.classList.add(timerClass);
-        } else {
-            sliderWrapper.classList.remove(timerClass);
-        }
-        offset += +getComputedStyle(slider).width.replace(/\D/g, "");
-        sliderWrapper.style = `transform: translateX(${offset}px);`;
-    });
+    if (infinite) {
+        setInterval(() => {
+                if (offset === -(getComputedStyle(slider).width.replace(/\D/g, "") * (sliderItems.length / count) - getComputedStyle(slider).width.replace(/\D/g, "")) || offset === -(getComputedStyle(sliderWrapper).width.replace(/\D/g, "") - getComputedStyle(sliderItem).width.replace(/\D/g, ""))) {
+                    offset = getComputedStyle(slider).width.replace(/\D/g, "");
+                    sliderWrapper.classList.add('slider__timer');
+                } else {
+                    sliderWrapper.classList.remove('slider__timer');
+                }
+                offset -= getComputedStyle(slider).width.replace(/\D/g, "");
+                sliderWrapper.style = `transform: translateX(${offset}px);`;
+        }, autoTimer);
+    } else {
+        nextBtn.addEventListener("click", () => {
+            if (offset === -(getComputedStyle(slider).width.replace(/\D/g, "") * (sliderItems.length / count) - getComputedStyle(slider).width.replace(/\D/g, "")) || offset === -(getComputedStyle(sliderWrapper).width.replace(/\D/g, "") - getComputedStyle(sliderItem).width.replace(/\D/g, ""))) {
+                offset = getComputedStyle(slider).width.replace(/\D/g, "");
+                sliderWrapper.classList.add('slider__timer');
+            } else {
+                sliderWrapper.classList.remove('slider__timer');
+            }
+            offset -= getComputedStyle(slider).width.replace(/\D/g, "");
+            sliderWrapper.style = `transform: translateX(${offset}px);`;
+        });
+        prevBtn.addEventListener("click", () => {      
+            if (offset === 0 || offset === (getComputedStyle(sliderWrapper).width.replace(/\D/g, "") / sliderItems.length)) {
+                offset = -getComputedStyle(slider).width.replace(/\D/g, "") * (sliderItems.length / count);
+                sliderWrapper.classList.add(timerClass);
+            } else {
+                sliderWrapper.classList.remove(timerClass);
+            }
+            offset += +getComputedStyle(slider).width.replace(/\D/g, "");
+            sliderWrapper.style = `transform: translateX(${offset}px);`;
+        });
+    }
 }
 AnimatedFunction({
     next: '.btn--next',
@@ -37,7 +50,9 @@ AnimatedFunction({
     selector: '.slider',
     wrapper: '.slider__wrapper',
     count: 1,
-    timerClass: 'slider__timer'
+    timerClass: 'slider__timer',
+    infinite: true,
+    autoTimer: 4000
 });
 
 // animatedFunction({

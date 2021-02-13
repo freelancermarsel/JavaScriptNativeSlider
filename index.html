@@ -16,15 +16,16 @@
   }
 
   .slider {
+    position: relative;
     width: 100%;
-    height: 80vh;
+    height: 100vh;
     overflow: hidden;
   }
 
   .slider__wrapper {
     display: flex;
     width: 700%;
-    height: 80vh;
+    height: 100vh;
     transition: all .2s linear;
   }
 
@@ -34,12 +35,22 @@
 
   .slider__item {
     width: 100%;
-    height: 80vh;
+    height: 100vh;
   }
 
   .slider__btns {
     display: flex;
     margin-top: 100px;
+    position: absolute;
+    top: 50%;
+  }
+
+  .btn--next {
+    right: 5%;
+  }
+
+  .btn--left {
+    left: 5%;
   }
 
   .btn {
