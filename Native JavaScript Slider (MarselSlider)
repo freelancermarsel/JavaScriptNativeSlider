@@ -7,5 +7,5 @@ AnimatedFunction({
   selector - master slider selector (Главный слайдер селектор)
   wrapper - a slider wrapper that scrolls (Обертка слайдер для скролла)
   count - number of visible slides (Количество видимых слайдов)
-  timerClass - scrolling speed if it is the last or first slider, not using dot (Время прокрутки, если слайд последний или первый);=
+  timerClass - scrolling speed if it is the last or first slider, not using dot (Время прокрутки, если слайд последний или первый);
 });
