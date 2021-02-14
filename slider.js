@@ -24,16 +24,14 @@ function AnimatedFunction({ next, prev, items, selector, wrapper, item, count = 
     } else if (nextBtn && prevBtn) {
         prevBtn.disabled = true;
         nextBtn.addEventListener("click", () => {
-            if (offset === -(getComputedStyle(slider).width.replace(/\D/g, "") * (sliderItems.length / count) - getComputedStyle(slider).width.replace(/\D/g, "")) || offset === -(getComputedStyle(sliderWrapper).width.replace(/\D/g, "") - getComputedStyle(sliderItem).width.replace(/\D/g, ""))) {
+            prevBtn.disabled = false;
+            if (offset <= -(getComputedStyle(slider).width.replace(/\D/g, "") * (sliderItems.length / count) - getComputedStyle(slider).width.replace(/\D/g, "")) || offset === -(getComputedStyle(sliderWrapper).width.replace(/\D/g, "") - getComputedStyle(sliderItem).width.replace(/\D/g, ""))) {
                 offset = getComputedStyle(slider).width.replace(/\D/g, "");
                 sliderWrapper.classList.add(timerClass);
+                prevBtn.disabled = true;
             } else {
                 sliderWrapper.classList.remove(timerClass);
             }
-            if (offset === -((getComputedStyle(sliderWrapper).width.replace(/\D/g, "") - getComputedStyle(slider).width.replace(/\D/g, "")) / count - getComputedStyle(slider).width.replace(/\D/g, ""))) {
-                nextBtn.disabled = true;
-            }
-            prevBtn.disabled = false;
             offset -= getComputedStyle(slider).width.replace(/\D/g, "");
             sliderWrapper.style = `transform: translateX(${offset}px);`;
         });
@@ -64,10 +62,10 @@ AnimatedFunction({
     item: '.slider__item',
     selector: '.slider',
     wrapper: '.slider__wrapper',
-    count: 1,
+    count: 5,
     timerClass: 'slider__timer',
     infinite: false,
-    autoTimer: 2000
+    autoTimer: 4000,
 });
 
 // animatedFunction({
